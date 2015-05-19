@@ -1,0 +1,139 @@
+
+
+<!--FLOT CHART-->
+<div class="content">
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <!--SIDE MENU - ONLOAD -->
+    <!--[onload;file=common.menu.html;getbody;comm]-->
+    <!--SIDE MENU - ONLOAD -->
+  </div>
+  <!-- Sidebar ends -->
+  <!-- Main bar -->
+  <div class="mainbar">
+
+ <div class="row">
+          <!--my projects-->
+          <div class="col-lg-3 col-sm-6 col-xs-12 url-link" data-link="[conf.site_url]/admin/myprojects">
+            <div class="box-content dashboard-top-stats display-table no-border">
+              <div class="col-xs-5 display-cell no-padding"> <i class="icon-folder-open dashboard-top-stats-icon bg-info"></i> </div>
+              <div class="col-xs-7 display-cell no-padding">
+                <div class="dashboard-top-stats-heading">Meus projetos</div>
+                <div class="dashboard-top-stats-value">0</div>
+              </div>
+              <div class="clearfix"></div>
+            </div>
+          </div>
+          <!--my projects-->
+          <!--my tasks-->
+          <div class="col-lg-3 col-sm-6 col-xs-12 url-link" data-link="[conf.site_url]/admin/mytasks">
+            <div class="box-content dashboard-top-stats display-table no-border">
+              <div class="col-xs-5 display-cell no-padding"> <i class="icon-list-ul dashboard-top-stats-icon bg-success"></i> </div>
+              <div class="col-xs-7 display-cell no-padding">
+                <div class="dashboard-top-stats-heading">Minhas tarefas</div>
+                <div class="dashboard-top-stats-value">0</div>
+              </div>
+              <div class="clearfix"></div>
+            </div>
+          </div>
+          <!--my tasks end-->
+          <!--tickets-->
+          <div class="col-lg-3 col-sm-6 col-xs-12 url-link" data-link="[conf.site_url]/admin/tickets/list/open">
+            <div class="box-content dashboard-top-stats display-table no-border">
+              <div class="col-xs-5 display-cell no-padding"> <i class="icon-file-text dashboard-top-stats-icon bg-warning"></i> </div>
+              <div class="col-xs-7 display-cell no-padding">
+                <div class="dashboard-top-stats-heading">Suportes</div>
+                <div class="dashboard-top-stats-value">0</div>
+              </div>
+              <div class="clearfix"></div>
+            </div>
+          </div>
+          <!--tickets end-->
+          <!--bugs-->
+          <div class="col-lg-3 col-sm-6 col-xs-12 url-link" data-link="[conf.site_url]/admin/bugs">
+            <div class="box-content dashboard-top-stats display-table no-border">
+              <div class="col-xs-5 display-cell no-padding"> <i class="icon-bug dashboard-top-stats-icon bg-purple"></i> </div>
+              <div class="col-xs-7 display-cell no-padding">
+                <div class="dashboard-top-stats-heading">Pendencias</div>
+                <div class="dashboard-top-stats-value">0</div>
+              </div>
+              <div class="clearfix"></div>
+            </div>
+          </div>
+          <!--bugs end-->
+          <div class="col-lg-3"></div>
+        </div>
+
+            <div class="row">
+          <div class="col-lg-4">
+            <!--WI_TASKS_SNAPSHOT-->
+            <div style="padding-bottom:20px;">
+              <div class="widget-content dashboard-widget-tasks slimScrollHomeTasks">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th style="font-weight:normal;">Tarefas</th>
+                      <th style="font-weight:normal;">Status</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td style="min-width:100px;"><a class="edit-task-modal links-blue" 
+                                data-toggle="modal"
+                                data-modal-window-title="Edit Task Details"
+                                data-height="350" 
+                                data-width="100%"
+                                data-task-text="[mytasks.tasks_text;block=tr;noerr]"
+                                data-task-start-date="[mytasks.tasks_start_date;block=tr;noerr]"
+                                data-task-end-date="[mytasks.tasks_end_date;block=tr;noerr]"
+                                data-task-id="[mytasks.tasks_id;block=tr;noerr]"
+                                data-task-project-id="[mytasks.tasks_project_id;block=tr;noerr]"
+                                data-task-assigned-to-id="[mytasks.tasks_assigned_to_id;block=tr;noerr]"
+                                data-task-milestone-id="[mytasks.tasks_milestones_id;block=tr;noerr]"
+                                data-task-events-id="[mytasks.tasks_events_id;block=tr;noerr]"
+                                data-task-status="[mytasks.tasks_status;block=tr;noerr]"
+                                data-target="#editTaskModal">
+                        <!--[mytasks.tasks_text;block=tr;onformat=runtime_check_blank_ucfirst;ope=max:70;comm]-->
+                        </a> </td>
+                      <td><!--[mytasks.tasks_status;block=tr;comm;onformat=runtime_status_colors;htmlconv=no]--></td>
+                    </tr>
+                    <tr>
+                      <!--[onshow;block=tr;when [visible.wi_tasks_none] == 1;comm]-->
+                      <td colspan="4"><div align="center">
+                          <p>&nbsp;</p>
+                          <p>&nbsp;</p>
+                          <h2>asasd</h2>
+                          <p>&nbsp;</p>
+                          <p>&nbsp;</p>
+                        </div></td>
+                    </tr>
+                    <tr>
+                      <!--[onshow;block=tr;when [visible.wi_tasks_seemore_link] == 1;comm]-->
+                      <td colspan="4"><div align="center"><a class="links-blue" href="/admin/mytasks">+ tarefas</a></div></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <!--WI_TASKS_SNAPSHOT-->
+            <!--WI_TASKS_CHART-->
+            <div class="widget-content dashboard-widget">
+              <!--heading-->
+              <div class="dashboard-panels-heading"> Tarefas </div>
+              <!--heading-->
+              <div id="flot-dashboard-tasks" class="dashboard-chart-tasks"> 
+                              <!--[onshow;block=div;when [visible.wi_tasks_chart] == 1;comm]-->
+              </div>
+              <!--wi_no_tasks-->
+              <div style="text-align:center; padding-top:20px; padding-bottom:20px;">
+                <!--[onshow;block=div;when [visible.wi_tasks_none] == 1;comm]-->
+                <h2></h2>
+              </div>
+              <!--wi_no_tasks-->
+            </div>
+            
+            </div>
+  
+         </div>
+</div>
+</div>
