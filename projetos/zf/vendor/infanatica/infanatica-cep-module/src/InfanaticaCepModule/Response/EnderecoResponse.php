@@ -52,8 +52,10 @@ class EnderecoResponse implements EnderecoResponseInterface{
         $xml = new \SimpleXMLElement('<endereco/>');
         foreach ($enderecoArray as $key => $value)
         {
+           
             $xml->addChild($key, $value);
         }
+        
         return $xml->asXML();
     }
 

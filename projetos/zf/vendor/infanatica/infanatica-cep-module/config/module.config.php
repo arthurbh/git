@@ -58,14 +58,15 @@ return array(
           'InfanaticaCepModule\Response\EnderecoResponse' => 'InfanaticaCepModule\Response\EnderecoResponse'
         ),
         'factories' => array(
-            'InfanaticaCepModule\Service\CepService' =>'InfanaticaCepModule\Factory\CepServiceFactory',
-            'InfanaticaCepModule\Service\ViaCepAdapter' =>'InfanaticaCepModule\Factory\ViaCepAdapterFactory',
-            'InfanaticaCepModule\Service\PostmonAdapter' =>'InfanaticaCepModule\Factory\PostmonAdapterFactory',
-            'InfanaticaCepModule\Service\CorreioControlAdapter' =>'InfanaticaCepModule\Factory\CorreioControlAdapterFactory',
-            'InfanaticaCepModule\Service\RepublicaVirtualAdapter' =>'InfanaticaCepModule\Factory\RepublicaVirtualAdapterFactory',
+            'InfanaticaCepModule\Service\CepService'                =>'InfanaticaCepModule\Factory\CepServiceFactory',
+            'InfanaticaCepModule\Service\ViaCepAdapter'             =>'InfanaticaCepModule\Factory\ViaCepAdapterFactory',
+            'InfanaticaCepModule\Service\PostmonAdapter'            =>'InfanaticaCepModule\Factory\PostmonAdapterFactory',
+            'InfanaticaCepModule\Service\CorreioControlAdapter'     =>'InfanaticaCepModule\Factory\CorreioControlAdapterFactory',
+            'InfanaticaCepModule\Service\RepublicaVirtualAdapter'   =>'InfanaticaCepModule\Factory\RepublicaVirtualAdapterFactory',
         ),
         'aliases' => array(
-            'InfanaticaCepModule\Adapter\CepDefaultAdapter' => 'InfanaticaCepModule\Service\ViaCepAdapter'
+            //MUDE AQUI O ADAPTADOR
+            'InfanaticaCepModule\Adapter\CepDefaultAdapter' => 'InfanaticaCepModule\Service\RepublicaVirtualAdapter'
         ),
     ),
 

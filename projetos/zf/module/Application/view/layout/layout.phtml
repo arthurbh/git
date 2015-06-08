@@ -48,7 +48,8 @@
 
                         <li <?php echo (count($url) == 1) ? 'class="active"' : ''; ?>><a href="<?php echo $this->url('home') ?>"><?php echo $this->translate('Inicio') ?></a></li>
                          <li  <?php echo (array_search('tarefas', $url)) ? 'class="active"' : ''; ?>><a href="<?php echo $this->url('tarefas') ?>"><?php echo $this->translate('Tarefas') ?></a></li>
-                        <li  <?php echo (array_search('cliente', $url)) ? 'class="active"' : ''; ?>><a href="<?php echo $this->url('cliente') ?>"><?php echo $this->translate('Clientes') ?></a></li>
+                         <li  <?php echo (array_search('cliente', $url)) ? 'class="active"' : ''; ?>><a href="<?php echo $this->url('cliente') ?>"><?php echo $this->translate('Clientes') ?></a></li>
+                        <li  <?php echo (array_search('financeiro', $url)) ? 'class="active"' : ''; ?>><a href="<?php echo $this->url('financeiro') ?>"><?php echo $this->translate('Financeiro') ?></a></li>
                     </ul>
                 </div><!--/.nav-collapse -->
             </div>

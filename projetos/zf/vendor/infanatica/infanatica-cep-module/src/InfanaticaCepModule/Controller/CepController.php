@@ -5,6 +5,7 @@ use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use InfanaticaCepModule\Service\CepService;
 use Zend\Http\Response;
+
 class CepController extends AbstractActionController
 {
     /** @var  CepService */
@@ -13,9 +14,10 @@ class CepController extends AbstractActionController
     /** @var  Response */
     protected $httpResponse;
 
+
     public function __construct(CepService $cepService, Response $httpResponse)
     {
-        $this->cepService = $cepService;
+        $this->cepService   = $cepService;
         $this->httpResponse = $httpResponse;
     }
 
@@ -29,8 +31,8 @@ class CepController extends AbstractActionController
     public function getEnderecobyCepAction()
     {
 
-        $cep = $this->params()->fromRoute('cep');
-        $formato = $this->params()->fromRoute('formato');
+        $cep        = $this->params()->fromRoute('cep');
+        $formato    = $this->params()->fromRoute('formato');
         try {
             $endereco = $this->cepService->getEnderecoByCep($cep,$formato);
             return $this->responseEnderecoComFormatado($endereco, $formato);

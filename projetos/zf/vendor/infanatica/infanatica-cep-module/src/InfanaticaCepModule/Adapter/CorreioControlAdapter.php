@@ -5,6 +5,8 @@ use Zend\Http\Client;
 use InfanaticaCepModule\Response\EnderecoResponse;
 use InfanaticaCepModule\Exception\CepNotFoundException;
 
+
+
 class CorreioControlAdapter implements CepAdapterInterface {
     /** @var  Client */
     protected $httpClient;
@@ -20,6 +22,7 @@ class CorreioControlAdapter implements CepAdapterInterface {
 
     public function getEnderecoByCep($cep)
     {
+        
         $this->httpClient->setUri("http://cep.correiocontrol.com.br/{$cep}.json");
 
         $response = $this->httpClient->send();

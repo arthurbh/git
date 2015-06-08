@@ -1,17 +1,17 @@
 <?php
 
- namespace Cliente\Controller;
+ namespace Financeiro\Controller;
 
  use Zend\Mvc\Controller\AbstractActionController;
  use Zend\View\Model\ViewModel;
- use Cliente\Model\Cliente;          // <-- Add this import
- use Cliente\Form\ClienteForm;       // <-- Add this import
+ use Financeiro\Model\Financeiro;          // <-- Add this import
+ use Financeiro\Form\FinanceiroForm;       // <-- Add this import
 
  use SanAuth\Controller;
 
- class ClienteController extends AbstractActionController
+ class FinanceiroController extends AbstractActionController
  {
- 	 protected $clienteTable;
+ 	 protected $FinanceiroTable;
 
      public function indexAction()
      {
@@ -23,7 +23,7 @@
         }
 
          // grab the paginator from the AlbumTable
-         $paginator = $this->getClienteTable()->fetchAll(true);
+         $paginator = $this->getFinanceiroTable()->fetchAll(true);
          // set the current page to what has been passed in query string, or to 1 if none set
          $paginator->setCurrentPageNumber((int) $this->params()->fromQuery('page', 1));
          // set the number of items per page to 10
@@ -38,20 +38,20 @@
 
      public function addAction()
      {
-         $form = new ClienteForm();
+         $form = new FinanceiroForm();
          $form->get('submit')->setValue('Add');
 
          $request = $this->getRequest();
          if ($request->isPost()) {
-             $cliente = new Cliente();
-             $form->setInputFilter($cliente->getInputFilter());
+             $Financeiro = new Financeiro();
+             $form->setInputFilter($Financeiro->getInputFilter());
              $form->setData($request->getPost());
 
              if ($form->isValid()) {
-                 $cliente->exchangeArray($form->getData());
-                 $this->getClienteTable()->saveCliente($cliente);
+                 $Financeiro->exchangeArray($form->getData());
+                 $this->getFinanceiroTable()->saveFinanceiro($Financeiro);
 
-               return $this->redirect()->toRoute('cliente');
+               return $this->redirect()->toRoute('Financeiro');
              }
          }
          return array('form' => $form);
@@ -62,33 +62,33 @@
      {
          $id = (int) $this->params()->fromRoute('id', 0);
          if (!$id) {
-             return $this->redirect()->toRoute('cliente', array(
+             return $this->redirect()->toRoute('Financeiro', array(
                  'action' => 'add'
              ));
          }
 
           try {
-             $cliente = $this->getClienteTable()->getCliente($id);
+             $Financeiro = $this->getFinanceiroTable()->getFinanceiro($id);
          }
          catch (\Exception $ex) {
-             return $this->redirect()->toRoute('cliente', array(
+             return $this->redirect()->toRoute('Financeiro', array(
                  'action' => 'index'
              ));
          }
 
-         $form  = new ClienteForm();
-         $form->bind($cliente);
+         $form  = new FinanceiroForm();
+         $form->bind($Financeiro);
          $form->get('submit')->setAttribute('value', 'Edit');
 
          $request = $this->getRequest();
          if ($request->isPost()) {
-             $form->setInputFilter($cliente->getInputFilter());
+             $form->setInputFilter($Financeiro->getInputFilter());
              $form->setData($request->getPost());
 
              if ($form->isValid()) {
-                 $this->getClienteTable()->saveCliente($cliente);
+                 $this->getFinanceiroTable()->saveFinanceiro($Financeiro);
 
-                 return $this->redirect()->toRoute('cliente');
+                 return $this->redirect()->toRoute('Financeiro');
              }
          }
 
@@ -103,7 +103,7 @@
      {
          $id = (int) $this->params()->fromRoute('id', 0);
          if (!$id) {
-             return $this->redirect()->toRoute('cliente');
+             return $this->redirect()->toRoute('Financeiro');
          }
 
          $request = $this->getRequest();
@@ -112,24 +112,24 @@
 
              if ($del == 'Yes') {
                  $id = (int) $request->getPost('id');
-                 $this->getClienteTable()->deleteCliente($id);
+                 $this->getFinanceiroTable()->deleteFinanceiro($id);
              }
 
-            return $this->redirect()->toRoute('cliente');
+            return $this->redirect()->toRoute('Financeiro');
          }
 
          return array(
              'id'    => $id,
-             'cliente' => $this->getClienteTable()->getCliente($id)
+             'Financeiro' => $this->getFinanceiroTable()->getFinanceiro($id)
          );
      }
 
-      public function getClienteTable()
+      public function getFinanceiroTable()
      {
-         if (!$this->clienteTable) {
+         if (!$this->FinanceiroTable) {
              $sm = $this->getServiceLocator();
-             $this->clienteTable = $sm->get('Cliente\Model\ClienteTable');
+             $this->FinanceiroTable = $sm->get('Financeiro\Model\FinanceiroTable');
          }
-         return $this->clienteTable;
+         return $this->FinanceiroTable;
      }
  }

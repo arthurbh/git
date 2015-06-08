@@ -2,7 +2,6 @@
 
 namespace InfanaticaCepModule\Factory;
 
-use InfanaticaCepModule\Adapter\PostmonAdapter;
 use InfanaticaCepModule\Adapter\RepublicaVirtualAdapter;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;

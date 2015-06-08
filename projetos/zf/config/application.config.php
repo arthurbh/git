@@ -7,7 +7,8 @@ return array(
             'SanAuth',
             'Cliente',
             'Usuario',
-            'InfanaticaCepModule'
+            'InfanaticaCepModule',
+            'Financeiro'
     ),
 
     // These are various options for the listeners attached to the ModuleManager

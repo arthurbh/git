@@ -14,12 +14,14 @@ class CepService {
     public function __construct(CepAdapterInterface $cepAdapter)
     {
         $this->cepAdapter = $cepAdapter;
+       
     }
 
     public function getEnderecoByCep($cep, $format=null)
     {
-        $cep = $this->removeNaoDigitos($cep);
-        $endereco = $this->cepAdapter->getEnderecoByCep($cep);
+       
+        $cep        = $this->removeNaoDigitos($cep);
+        $endereco   = $this->cepAdapter->getEnderecoByCep($cep);
 
         if (! $endereco instanceof EnderecoResponseInterface){
             throw new EnderecoResponseException();

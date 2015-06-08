@@ -1,0 +1,59 @@
+<?php
+
+ $title = 'Financeiro';
+ $this->headTitle($title);
+ ?>
+ <h1><?php echo $this->escapeHtml($title); ?></h1>
+  <table class="table">
+     <tr>
+         <th>Cliente</th>
+         <th>Vendedor</th>
+         <th>Serviço</th>
+         <th>Forma pag.</th>
+         <th>Valor Pago</th>
+         <th>À receber</th>
+         <th>Data venda</th>
+         <th>Data entrega</th>
+         <th>Data venc. pag.</th>
+         <th>Parcelas pagas</th>
+         <th>Parcelas à pagar</th>
+         <th>Opções</th>
+     </tr>
+     <?php foreach ($this->paginator as $cliente) : // <-- change here! ?>
+         <tr>
+             <td><?php echo $this->escapeHtml($cliente->title);?></td>
+             <td><?php echo $this->escapeHtml($cliente->title);?></td>
+             <td><?php echo $this->escapeHtml($cliente->artist);?></td>
+             <td><?php echo $this->escapeHtml($cliente->title);?></td>
+             <td><?php echo $this->escapeHtml($cliente->artist);?></td>
+             <td><?php echo $this->escapeHtml($cliente->title);?></td>
+             <td><?php echo $this->escapeHtml($cliente->artist);?></td>
+             <td><?php echo $this->escapeHtml($cliente->title);?></td>
+             <td><?php echo $this->escapeHtml($cliente->artist);?></td>
+             <td><?php echo $this->escapeHtml($cliente->title);?></td>
+             <td><?php echo $this->escapeHtml($cliente->title);?></td>
+
+             <td>
+                 <a href="<?php echo $this->url('cliente',
+                     array('action' => 'edit', 'id' => $cliente->id));?>">Edit</a>
+                 <a href="<?php echo $this->url('cliente',
+                     array('action' => 'delete', 'id' => $cliente->id));?>">Delete</a>
+             </td>
+         </tr>
+     <?php endforeach; ?>
+ </table>
+  <?php
+ // add at the end of the file after the table
+    echo $this->paginationControl(
+     // the paginator object
+     $this->paginator,
+     // the scrolling style
+     'sliding',
+     // the partial to use to render the control
+     'partial/paginator.phtml',
+     // the route to link to when a user clicks a control link
+     array(
+         'route' => 'cliente'
+     )
+ );
+ ?>
