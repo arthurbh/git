@@ -134,11 +134,11 @@ echo $this->headScript()
 		                </div>
 		                
 		                <div class="col-md-6">
-		                	<input type="text" 	 name="contato" placeholder="CONTATO" value="" required data-parsley-minlength="3"  data-parsley-minlength-message = "No mínimo 3 caracteres!" data-parsley-group="block1">
+		                	<input type="text" 	 name="contato" placeholder="CONTATO" required data-parsley-minlength="3" data-parsley-maxlength="20"   data-parsley-minlength-message = "No mínimo 3 caracteres!" data-parsley-maxlength-message = "No máximo 20 caracteres!" data-parsley-group="block1">
 		                </div>
 						
 						<div class="col-md-6">
-		                	<input type="text" name="cep" data-parsley-range="[8, 40]" placeholder="CEP" value=""  required data-parsley-group="block2">
+		                	<input type="text" name="cep" data-parsley-trigger="keyup" data-parsley-pattern="/^[0-9]{5}-[0-9]{3}$/" placeholder="CEP"  data-parsley-cep-message="CEP inválido	" value="" required data-parsley-group="block1">
 		                </div>
 
                 </div>

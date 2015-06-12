@@ -5,14 +5,14 @@
   // Add these import statements
  use Zend\InputFilter\InputFilter;
  use Zend\InputFilter\InputFilterAwareInterface;
- use Zend\InputFilter\InputFilterInterface;
+  use Zend\InputFilter\InputFilterInterface;
 
  class Cliente implements InputFilterAwareInterface
  {
-     public $id;
-     public $artist;
-     public $title;
-     protected $inputFilter;                       // <-- Add this variable
+     public     $id;
+     public     $artist;
+     public     $title;
+     protected  $inputFilter;                       // <-- Add this variable
 
 
      public function exchangeArray($data)

@@ -11,7 +11,8 @@ window.ParsleyConfig.i18n['pt-br'] = $.extend(window.ParsleyConfig.i18n['pt-br']
     number:       "Este campo deve ser um número válido.",
     integer:      "Este campo deve ser um inteiro válido.",
     digits:       "Este campo deve conter apenas dígitos.",
-    alphanum:     "Este campo deve ser alfa numérico."
+    alphanum:     "Este campo deve ser alfa numérico.",
+    cep:          "Este campo cep é inválido."
   },
   notblank:       "Este campo não pode ficar vazio.",
   required:       "Este campo é obrigatório.",

@@ -1,9 +1,9 @@
 <?php
 
- namespace Cliente;
+ namespace Estado;
 
- use Cliente\Model\Cliente;
- use Cliente\Model\ClienteTable;
+ use Estado\Model\Estado;
+ use Estado\Model\EstadoTable;
  use Zend\Db\ResultSet\ResultSet;
  use Zend\Db\TableGateway\TableGateway;
 
@@ -35,16 +35,16 @@
      {
          return array(
              'factories' => array(
-                 'Cliente\Model\ClienteTable' =>  function($sm) {
-                     $tableGateway = $sm->get('ClienteTableGateway');
-                     $table = new ClienteTable($tableGateway);
+                 'Estado\Model\EstadoTable' =>  function($sm) {
+                     $tableGateway = $sm->get('EstadoTableGateway');
+                     $table = new EstadoTable($tableGateway);
                      return $table;
                  },
-                 'ClienteTableGateway' => function ($sm) {
+                 'EstadoTableGateway' => function ($sm) {
                      $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
                      $resultSetPrototype = new ResultSet();
-                     $resultSetPrototype->setArrayObjectPrototype(new Cliente());
-                     return new TableGateway('cliente', $dbAdapter, null, $resultSetPrototype);
+                     $resultSetPrototype->setArrayObjectPrototype(new Estado());
+                     return new TableGateway('estado', $dbAdapter, null, $resultSetPrototype);
                  },
              ),
          );

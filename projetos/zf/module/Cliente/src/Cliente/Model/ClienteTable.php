@@ -23,7 +23,7 @@ namespace Cliente\Model;
      {
          if ($paginated) {
            
-             $select = new Select('album');
+             $select = new Select('cliente');
              $resultSetPrototype = new ResultSet();
              $resultSetPrototype->setArrayObjectPrototype(new Cliente());
              // create a new pagination adapter object
@@ -63,7 +63,9 @@ namespace Cliente\Model;
          $id = (int) $cliente->id;
          if ($id == 0) {
              $this->tableGateway->insert($data);
-         } else {
+         } 
+         else {
+            
              if ($this->getCliente($id)) {
                  $this->tableGateway->update($data, array('id' => $id));
              } else {

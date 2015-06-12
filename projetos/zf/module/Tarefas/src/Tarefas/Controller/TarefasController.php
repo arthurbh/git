@@ -24,6 +24,8 @@
 
          // grab the paginator from the TarefasTable
          $paginator = $this->getTarefasTable()->fetchAll(true);
+
+        
          // set the current page to what has been passed in query string, or to 1 if none set
          $paginator->setCurrentPageNumber((int) $this->params()->fromQuery('page', 1));
          // set the number of items per page to 10

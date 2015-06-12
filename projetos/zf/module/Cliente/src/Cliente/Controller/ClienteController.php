@@ -8,6 +8,7 @@
  use Cliente\Form\ClienteForm;       // <-- Add this import
 
  use SanAuth\Controller;
+ use Estado\Controller\EstadoController;
 
  class ClienteController extends AbstractActionController
  {
@@ -15,7 +16,6 @@
 
      public function indexAction()
      {
-
        
         if(!$this->getServiceLocator()->get('AuthService')->hasIdentity())
         {
@@ -29,15 +29,26 @@
          // set the number of items per page to 10
          $paginator->setItemCountPerPage(10);
 
-         return new ViewModel(array(
+         $view =  new ViewModel(array(
              'paginator' => $paginator
          ));
+
+         /*
+        
+         return new 
+         */
+         //setando a view
+         $view->setTemplate('cliente/index.phtml');
+       
+         return  $view;
 
       
      }
 
      public function addAction()
      {
+
+         
          $form = new ClienteForm();
          $form->get('submit')->setValue('Add');
 
@@ -54,7 +65,11 @@
                return $this->redirect()->toRoute('cliente');
              }
          }
-         return array('form' => $form);
+
+
+         return array('form' => $form,'estado' => array());
+
+         //return new ViewModel();
      }
 
     
