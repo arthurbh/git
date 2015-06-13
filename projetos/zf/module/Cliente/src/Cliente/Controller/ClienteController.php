@@ -8,7 +8,7 @@
  use Cliente\Form\ClienteForm;       // <-- Add this import
 
  use SanAuth\Controller;
- use Estado\Controller\EstadoController;
+ use Estado\Model\EstadoTable; 
 
  class ClienteController extends AbstractActionController
  {
@@ -49,8 +49,14 @@
      {
 
          
-         $form = new ClienteForm();
+        
+
+         //$this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
+         $dbAdapter = $this->getServiceLocator()->get('Estado\Model\EstadoTable');
+
+         $form = new ClienteForm($dbAdapter);
          $form->get('submit')->setValue('Add');
+         
 
          $request = $this->getRequest();
          if ($request->isPost()) {

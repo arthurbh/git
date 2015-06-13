@@ -145,11 +145,8 @@ echo $this->headScript()
 
                   <div class="row">
 		                 <div class="col-md-6">
-		               		<select name="estado">
-								<option value="">ESTADO</option>
-		               			<option value="0">MG</option>
-		               			<option value="1">SP</option>
-		               			</select>
+		               		<?php  echo $this->formRow($form->get('estado')); ?>
+								
 		                </div>
 		                
 		                <div class="col-md-6">

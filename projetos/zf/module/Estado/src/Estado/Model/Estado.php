@@ -9,6 +9,7 @@
 
  class Estado implements InputFilterAwareInterface
  {
+     public     $id;
      public     $estado;
      public     $uf;
      protected  $inputFilter;                       // <-- Add this variable
@@ -16,6 +17,7 @@
 
      public function exchangeArray($data)
      {
+         $this->id     = (!empty($data['id'])) ? $data['id'] : null;
          $this->uf     = (!empty($data['uf'])) ? $data['uf'] : null;
          $this->estado = (!empty($data['estado'])) ? $data['estado'] : null;
      }
