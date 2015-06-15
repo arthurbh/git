@@ -9,6 +9,7 @@
 
  use SanAuth\Controller;
  use Estado\Model\EstadoTable; 
+ use Cidade\Model\CidadeTable; 
 
  class ClienteController extends AbstractActionController
  {
@@ -52,9 +53,10 @@
         
 
          //$this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
-         $dbAdapter = $this->getServiceLocator()->get('Estado\Model\EstadoTable');
+         $dbAdapterEstado = $this->getServiceLocator()->get('Estado\Model\EstadoTable');
+         //$dbAdapterCidade = $this->getServiceLocator()->get('Cidade\Model\CidadeTable');
 
-         $form = new ClienteForm($dbAdapter);
+         $form = new ClienteForm($dbAdapterEstado);
          $form->get('submit')->setValue('Add');
          
 

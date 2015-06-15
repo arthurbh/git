@@ -9,7 +9,8 @@ return array(
             'Usuario',
             'InfanaticaCepModule',
             'Financeiro',
-            'Estado'
+            'Estado',
+            'Cidade'
     ),
 
     // These are various options for the listeners attached to the ModuleManager

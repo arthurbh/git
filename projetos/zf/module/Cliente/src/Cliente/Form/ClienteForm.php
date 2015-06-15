@@ -80,7 +80,7 @@ namespace Cliente\Form;
             $selectData = array();
 
             foreach ($data as $selectOption) {
-                $selectData[$selectOption->id] = $selectOption->estado;
+                $selectData[$selectOption->id] = $selectOption->uf;
             }
 
             return $selectData;

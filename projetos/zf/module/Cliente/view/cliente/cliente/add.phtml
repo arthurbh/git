@@ -146,14 +146,12 @@ echo $this->headScript()
                   <div class="row">
 		                 <div class="col-md-6">
 		               		<?php  echo $this->formRow($form->get('estado')); ?>
-								
-		                </div>
+						</div>
 		                
 		                <div class="col-md-6">
 		               		<select name="cidade">
-								<option value="">CIDADE</option>
-		               			<option value="0">BELO HORIZONTE</option>
-		               			</select>
+								<option value="">SELECIONE O ESTADO</option>
+		               		</select>
 		                </div>
                 </div>
 
@@ -334,6 +332,8 @@ echo $this->headScript()
 	var bairro;
 	var logradouro;
 
+	var urlcidade = "/cidade/buscaporestado/"; 
+
 	//Funcao para pegar endereco de acordo com o CEP
 
 
@@ -427,15 +427,19 @@ echo $this->headScript()
 	}
 
 
-	Endereco.prototype.estado = function()
+	Endereco.prototype.estado = function(estadouf,cidadeselect,cidadeField)
 	{
 		
 		 var optionestado;
 		 var estadochecked 	= false;
-		 var estadouf 		= this.getUf();
+		 
 		 estadouf 			= estadouf.toLowerCase();
 		 var campo 			= this.getNameFieldUf();
+		 var idestado 		= null;
 
+	
+
+		 //console.log(this.getCidade)
 		 //this.setNameFieldUf
 		 $(campo+' option').filter(function () { 
 		 	
@@ -443,9 +447,14 @@ echo $this->headScript()
 		 	
 		 	if(optionestado == estadouf && estadochecked === false)
 		 	{
+
 		 		estadochecked = true;
 				$(this).prop('selected', true);
-				
+
+				 idestado = $(this).attr('value');
+
+				 var classeEndereco		 = new Endereco();
+				 classeEndereco.cidade(idestado,cidadeselect,cidadeField);
 		 	}
 		 	
 
@@ -453,20 +462,75 @@ echo $this->headScript()
 
 	 }
 
-	 Endereco.prototype.cidade = function(valueEstado,valueCidade)
+	 Endereco.prototype.cidade = function(id,nomecidade,campo)
 	{
-		/*
-		$.ajax({
-		  method: "GET",
-		  url: "some.php",
-		  data: { name: "John", location: "Boston" }
-		})
-		  .done(function( msg ) {
-		    alert( "Data Saved: " + msg );
-		  });
-   */
-		// ira busca via AJAX As cidades de acordo com o estado e/ou cidade e preenchera no combobox
-		// Caso a cidade seja mencioda ela já deverá ser carregada
+
+		
+		urlcidade += id;
+
+	
+
+		var cidadechecked 	= false;
+		
+		var cidadeoption 	= '';
+		
+		$.getJSON(urlcidade, function( cidades ) {
+
+
+			$(campo).eq(0).text('');
+			$(campo).eq(0).append('<option value="">SELECIONE A CIDADE</option>');
+
+			$.each(cidades, function(index,cidadeobj){
+
+				if (cidadeobj instanceof Object == true) {
+
+						if(cidadeobj.id.length > 0 && cidadeobj.cidade.length > 0)
+						{
+
+							cidadeoption = cidadeobj.cidade;
+							cidadeoption = cidadeoption.toUpperCase();
+
+							//formar options
+
+							$(campo).append($('<option>', {
+			    				value: cidadeobj.id,
+			    				text: cidadeoption
+							}));
+							
+							
+							
+						}
+
+				}
+				else
+					$(campo).html();
+
+			});
+
+			if($.trim(nomecidade) != '')
+			{
+
+				$(campo+' option').filter(function () { 
+			 	
+			 	var optionecidade 	= $.trim($(this).html()).toUpperCase();
+
+			 	nomecidade 			= nomecidade.toUpperCase();
+			 	
+			 	if(optionecidade == nomecidade && cidadechecked === false)
+			 	{
+			 		cidadechecked = true;
+					$(this).prop('selected', true);
+
+					
+			 	}
+			 	
+
+			  });
+			}
+
+		}); //close JSON
+
+  
 
 	 }
 
@@ -497,10 +561,15 @@ echo $this->headScript()
   	 var oldcep;
   	 var tempValue;
 
-
-
-  	 var classeEnd		 = new Endereco();
+ 	 var classeEnd		 = new Endereco();
   	 //var classeEnd2 	 = new Endereco();
+
+  	 classeEnd.setNameFieldUf('select[name="estado"]');
+  	 classeEnd.setNameFieldCidade('select[name="cidade"]');
+  	 classeEnd.setNameFieldBairro('input[name="bairro"]');
+  	 classeEnd.setNameFieldLogradouro('input[name="logradouro"]');
+
+  	 var fieldEstado = classeEnd.getNameFieldUf();
 
 
   		 $('input[name="cep"]').bind('focusout',function (){
@@ -526,16 +595,19 @@ echo $this->headScript()
 							//set Valor do CEP
 					 		classeEnd.setCep(tempValue);
 					 		classeEnd.setUf(cep.uf);
-					 		classeEnd.setNameFieldUf('select[name="estado"]');
-					 		classeEnd.setCidade(cep.localidade);
-					 		//classeEnd.setNameFieldCidade('select[name="cidade"]');
-					 		classeEnd.setBairro(cep.bairro);
-					 		classeEnd.setNameFieldBairro('input[name="bairro"]');
-					 		classeEnd.setLogradouro(cep.logradouro);
-					 		classeEnd.setNameFieldLogradouro('input[name="logradouro"]');
-					 		//  camposCep.prototype = new Cep();
 					 		
-					 		classeEnd.estado();
+					 		classeEnd.setCidade(cep.localidade);
+					 		
+					 		classeEnd.setBairro(cep.bairro);
+					 		
+					 		classeEnd.setLogradouro(cep.logradouro);
+					 		
+					 		//  camposCep.prototype = new Cep();
+					 		var estadouf 	   = classeEnd.getUf();
+					 		var cidadeselect   = classeEnd.getCidade();
+	 	 					var cidadeField    = classeEnd.getNameFieldCidade();
+					 		
+					 		classeEnd.estado(estadouf,cidadeselect,cidadeField);
 					 		classeEnd.bairro();
 					 		classeEnd.logradouro();
 
@@ -547,6 +619,21 @@ echo $this->headScript()
 		 	 }
 		 	 	
 		}); // close bind 
+
+   		var estadotext = '';
+
+
+   		$(fieldEstado).change(function(){
+
+   			estadotext =  $(fieldEstado+' option:selected').text();
+   			
+   			classeEnd.setUf(estadotext);
+
+   			cidadeField    = classeEnd.getNameFieldCidade();
+
+   			classeEnd.estado(estadotext,'',cidadeField);
+
+   		})
 
 
 
