@@ -1,11 +1,7 @@
 <?php
 
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-echo 'nome: '.$data['name'];
-echo '<br />';
-echo 'Hello';
+echo 'ola';
+echo '<p></p>';
+echo $data['name'];
+echo '<p></p>';
+echo $data['name2'];

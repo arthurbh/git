@@ -1,6 +1,6 @@
 <?php
 
-class Home extends Controller
+class Testes extends Controller
 {
 
 	protected $user;
@@ -9,7 +9,7 @@ class Home extends Controller
 
 	public function __construct()
 	{
-		$this->user = $this->model('User');
+		#$this->user = $this->model('User');
 	}
 
 

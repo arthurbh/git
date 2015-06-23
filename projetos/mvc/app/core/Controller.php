@@ -1,23 +1,37 @@
 <?php
 
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
+
 
 class Controller
 {
-    protected function model($model){
-       //require_once '../app/models/'.$model.'.php';
-        return new $model;
-    }
-  
-    
-    public function view($view,$data = [])
-    {
-        require_once '../app/views/'.$view.'.php';
-        
-    }
-  
+ // models e views
+
+	protected $websoap = null;
+
+	public function __construct()
+	{
+		  $this->ws_soap       = WebService::getInstance();
+	}
+
+	protected function model($model)
+	{
+		
+			//r
+			if(class_exists($model))
+			return new $model();
+
+			else
+			{
+				require  PATH.'models/'.$model.'.php';
+				return new $model();
+			}
+	}
+
+	public function view($view,$data = [])
+	{
+
+		require_once PATH.'views/'.$view.'.php';
+
+	}
 }
