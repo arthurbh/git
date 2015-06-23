@@ -1,0 +1,490 @@
+   <?php      
+   
+   echo $this->headLink()
+                        ->prependStylesheet($this->basePath('css/normalize.css'))
+                        ->prependStylesheet($this->basePath('css/jquery.steps.css'))
+                        ->prependStylesheet($this->basePath('css/parsley.css'))
+                        ->prependStylesheet($this->basePath('css/chosen.css'));
+                    	
+?>	
+
+<style type="text/css" media="screen">
+		/*custom font*/
+@import url(http://fonts.googleapis.com/css?family=Montserrat);
+
+/*basic reset*/
+* {margin: 0; padding: 0;}
+
+
+body {
+	font-family: montserrat, arial, verdana;
+}
+/*form styles*/
+#wizard {
+	margin: 0px auto;
+	text-align: center;
+	position: relative;
+}
+
+
+/*inputs*/
+
+/*buttons*/
+
+#wizard .action-button:hover, #wizard .action-button:focus {
+	box-shadow: 0 0 0 2px white, 0 0 0 3px #27AE60;
+}
+
+#wizard .scroll{
+	height:400px;
+	overflow:auto;
+	overflow-x:hidden;
+}
+
+      .validate {
+        margin-top: 10px;
+      }
+   
+      .invalid-form-error-message {
+        margin-top: 10px;
+        padding: 5px;
+      }
+      .invalid-form-error-message.filled {
+        border-left: 2px solid red;
+      }
+      .btn-info, .btn-default {
+        margin-top: 10px;
+      }
+
+
+.form-field  {
+	padding: 15px;
+	border: 1px solid #ccc;
+	border-radius: 3px;
+	margin-bottom: 10px;
+	width: 100%;
+	box-sizing: border-box;
+	font-family: montserrat;
+	color: #2C3E50;
+	font-size: 13px;
+}
+
+	
+		</style>
+
+<?php
+echo $this->headScript()
+            ->prependFile($this->basePath('js/modernizr-2.6.2.min.js'))
+            ->prependFile($this->basePath('js/jquery.cookie-1.3.1.js'))
+        	->prependFile($this->basePath('js/chosen.jquery.js'))
+            ->prependFile($this->basePath('js/jquery.steps.js'))
+            ->prependFile($this->basePath('js/parsley.min.js'))
+ 			->prependFile($this->basePath('js/pt-br.js'));
+ 			
+ 
+ // module/Cliente/view/cliente/cliente/add.phtml:
+
+ $title = 'Adicionar Cliente';
+ $this->headTitle($title);
+ ?>
+ <h1><?php echo $this->escapeHtml($title); ?></h1>
+
+
+            <script>
+            	
+                $(function ()
+                {
+
+                    $("#wizard").steps({
+                        headerTag: "h2",
+                        bodyTag: "section",
+                        transitionEffect: "slideLeft"
+                    });
+
+                   
+                });
+
+
+            </script>
+
+            <form id="form" method="post" action="teste.php" data-parsley-validate>
+
+            <input type="hidden" name="id" value="">
+
+            <div class="main">
+
+            <div id="wizard" class="col-md-12">
+                <h2>Dados Pessoais</h2>
+
+                <section class="scroll">
+
+                <div class="row">
+		                <div class="col-md-6">
+		               		<input type="text" name="nome" data-parsley-pattern="/^[(]{0,1}[0-9]{2,3}[)]{0,1}[-\s\.]{0,1}[0-9]{4,5}[-\s\.]{0,1}[0-9]{4}$/" class="form-field" placeholder="NOME" value="" required data-parsley-group="block1">
+		                </div>
+		                
+		                <div class="col-md-6">
+		                	<input type="text" 	 name="contato" class="form-field" placeholder="CONTATO" value="" required data-parsley-minlength="3"  data-parsley-minlength-message = "No mínimo 3 caracteres!" data-parsley-group="block1">
+		                </div>
+						
+						<div class="col-md-6">
+		                	<input type="text" name="cep" class="form-field" data-parsley-range="[8, 40]" placeholder="CEP" value=""  required data-parsley-group="block2">
+		                </div>
+
+                </div>
+				 <div class="row">
+                 		<div class="col-md-12">
+		               		<select name="estados" data-placeholder="Escolher estado" data-parsley-range="[1, 100]" required class="chosen-select" style="width:420px;" tabindex="1">
+								<option value=""></option>
+		               			<option value="0">MG</option>
+		               			<option value="1">SP</option>
+		               			</select>
+		                </div>
+				</div>
+                <div class="row">
+		                <div class="col-md-6">
+		               		<input type="text" name="profissao" placeholder="PROFISSÃO" value="">
+		                </div>
+		                
+		                <div class="col-md-6">
+		                		<input type="text" name="setor" placeholder="SETOR" value="">
+		                </div>
+                </div>
+
+                <div class="row">
+		                <div class="col-md-6">
+		               		<input type="text" name="cpf" placeholder="CPF" value="">
+		                </div>
+		                
+		                <div class="col-md-6">
+		                		<input type="text" name="rg" placeholder="RG" value="">
+		                </div>
+                </div>
+
+                <div class="row">
+		                <div class="col-md-6">
+		               		<input type="text" name="email" placeholder="EMAIL" value="">
+		                </div>
+		                
+		                <div class="col-md-6">
+		                		<input type="text" name="data_nasc" placeholder="DATA NASCIMENTO" value="">
+		                </div>
+                </div>
+
+                 <div class="row">
+		                <div class="col-md-6">
+		               		<input type="text" name="telefone" placeholder="TELEFONE" value="">
+		                </div>
+		                
+		                <div class="col-md-6">
+		                		<input type="text" name="celular" placeholder="CELULAR" value="">
+		                </div>
+                </div>
+
+               
+
+
+				</section>
+
+                <h2> Cliente</h2>
+                <section class="scroll">
+
+                 <div class="row">
+		                <div class="col-md-6">
+		               		<select name="tipo_pessoa">
+								<option value="">TIPO PESSOA</option>
+		               			<option value="0">Física</option>
+		               			<option value="1">Jurídica</option>
+		               			</select>
+		                </div>
+		                
+		                <div class="col-md-6">
+		                		&nbsp;
+		                </div>
+                </div>
+
+
+                 <div class="row">
+		                <div class="col-md-6">
+		               		<input type="text" name="ramo" placeholder="RAMO" value="">
+		                </div>
+		                
+		                <div class="col-md-6">
+		                		<input type="text" name="cnpj" placeholder="CNPJ" value="">
+		                </div>
+                </div>
+
+                <div class="row">
+		                <div class="col-md-6">
+		               		<input type="text" name="site" placeholder="SITE" value="">
+		                </div>
+		                
+		                <div class="col-md-6">
+		                		<input type="text" name="setor" placeholder="CNPJ" value="">
+		                </div>
+                </div>
+
+                 <div class="row">
+		                <div class="col-md-6">
+		               		<input type="text" name="cep2" data-parsley-range="[8, 40]" placeholder="CEP" value=""  required data-parsley-group="block2">
+		                </div>
+		                
+		                <div class="col-md-6">
+		                		&nbsp;
+		                </div>
+                </div>
+
+                  <div class="row">
+		                 <div class="col-md-6">
+		               		<select name="estado">
+								<option value="">ESTADO</option>
+		               			<option value="0">MG</option>
+		               			<option value="1">SP</option>
+		               			</select>
+		                </div>
+		                
+		                <div class="col-md-6">
+		               		<select name="cidade">
+								<option value="">CIDADE</option>
+		               			<option value="0">BELO HORIZONTE</option>
+		               			</select>
+		                </div>
+                </div>
+
+                 <div class="row">
+		                <div class="col-md-6">
+			                <input type="text" name="bairro" placeholder="BAIRRO" value="">
+			            </div>
+		                
+		                <div class="col-md-6">
+		                     <input type="text" name="logradouro" placeholder="LOGRADOURO" value="">
+		                </div>
+                </div>
+
+                <div class="row">
+		                <div class="col-md-6">
+		               		<input type="text" name="numero" placeholder="NUMERO" value="">
+		                </div>
+		                
+		                <div class="col-md-6">
+		                		<input type="text" name="complemento" placeholder="COMPLEMENTO" value="">
+		                </div>
+                </div>
+
+               
+
+
+                 <div class="row">
+		                <div class="col-md-6">
+		               		<select name="indicacao">
+								<option value="">INDICAÇÃO</option>
+		               			<option value="cartao">Cartao</option>
+		               			<option value="cliente">Cliente</option>
+		               			<option value="google">Google</option>
+		               			<option value="facebook">Facebook</option>
+		               			<option value="vendedor">Vendedor</option>
+		               			
+		               			<option value="outros">Outros</option>
+		               		</select>
+		                </div>
+		                
+		                <div class="col-md-6">
+		                		<input type="text" name="outros_indicacao" placeholder="Outros" value="">
+		                </div>
+                </div>
+
+                  <div class="row">
+		                <div class="col-md-6">
+		               		<select name="vendedor">
+								<option value="">VENDEDOR</option>
+		               			<option value="0">ARTHUR</option>
+		               			</select>
+		                </div>
+		                
+		                <div class="col-md-6">
+		                		&nbsp;
+		                </div>
+                </div>
+
+                </section>
+
+                <h2>Serviços</h2>
+                <section>
+                    <p>Morbi ornare tellus at elit ultrices id dignissim lorem elementum. Sed eget nisl at justo condimentum dapibus. Fusce eros justo, 
+                        pellentesque non euismod ac, rutrum sed quam. Ut non mi tortor. Vestibulum eleifend varius ullamcorper. Aliquam erat volutpat. 
+                        Donec diam massa, porta vel dictum sit amet, iaculis ac massa. Sed elementum dui commodo lectus sollicitudin in auctor mauris 
+                        venenatis.</p>
+                </section>
+
+                <h2>Pagamento</h2>
+                <section>
+                    <p>Quisque at sem turpis, id sagittis diam. Suspendisse malesuada eros posuere mauris vehicula vulputate. Aliquam sed sem tortor. 
+                        Quisque sed felis ut mauris feugiat iaculis nec ac lectus. Sed consequat vestibulum purus, imperdiet varius est pellentesque vitae. 
+                        Suspendisse consequat cursus eros, vitae tempus enim euismod non. Nullam ut commodo tortor.</p>
+                </section>
+                 <div class="invalid-form-error-message"></div>
+            </div>
+	</div>
+</form>
+
+
+ <script type="text/javascript">
+
+
+
+  window.ParsleyValidator.setLocale('pt-br');
+
+
+	function Cep() { 
+
+		var cep; 
+
+		this.getCep = function () { 
+			return cep; 
+		};
+		 this.setCep = function (value) { 
+		 	cep = value; 
+		 }; 
+	} 
+
+
+	Cep.prototype.modificaValores = function () { 
+	 console.log(this.getBairro());
+
+	 var optionestado;
+	 var optioncidade;
+
+	 $('select[name="estados"] option').filter(function () { 
+	 	optionestado = $.trim($(this).html());
+	 	
+	 	if(optionestado == "MG")
+	 	{
+	 		
+			$(this).prop('selected', true);
+	 		$("select[name='estados']").trigger('chosen:updated');
+		}
+	 	
+
+	  }).val();
+
+	
+	 
+	 /*
+	 var value_estado = this.
+		$('#estado option[value=MASCULINO]').prop('selected', true);
+		$('#test').find('option[text="B"]').val();
+	 */
+		
+	}
+
+	function CamposCep()
+	{	
+		var field_uf;
+		var field_cidade;
+		var field_bairro;
+		var field_logradouro;
+		
+		this.getUf = function () { 
+			return field_uf; 
+		};
+		this.setUf = function (value) { 
+		 	field_uf = value; 
+		}; 
+
+		this.getCidade = function () { 
+			return field_cidade; 
+		};
+		this.setCidade = function (value) { 
+		 	field_cidade = value; 
+		};
+
+		this.getBairro = function () { 
+			return field_bairro; 
+		};
+		this.setBairro = function (value) { 
+		 	field_bairro = value; 
+		};
+
+		this.getLogradouro = function () { 
+			return field_logradouro; 
+		};
+		this.setLogradouro = function (value) { 
+		 	field_logradouro = value; 
+		};
+
+
+	}
+
+	
+
+  $(function (){
+
+  	 var oldcep;
+  	 var tempValue;
+
+  	 var estado;
+  	 var cidade;
+  	 var bairro;
+  	 var logradouro;
+
+
+
+  	 CamposCep.prototype = new Cep();
+  	 var classeCep 		 = new CamposCep();
+
+
+  var config = 		{
+	                   '.chosen-select': {},
+	                   '.chosen-select-deselect': {allow_single_deselect: true},
+	                   '.chosen-select-no-single': {disable_search_threshold: 10},
+	                   '.chosen-select-no-results': {no_results_text: 'Resultado nao encontrado!'},
+	                    '.chosen-select-width': {width: "95%"}
+                    }
+                    for (var selector in config) {
+                        $(selector).chosen(config[selector]);
+                    }
+
+  	
+  	
+  		 $('input[name="cep"]').bind('blur',function (){
+
+  	 		tempValue 	= $.trim($('input[name="cep"]').val());
+		
+			 //PEGAR URL CORRETA NO FUTURO DA MANEIRA CORRETA
+		 	 var url 	= 'http://zend.com/cep/'+tempValue; //MANEIRA INCORRETA
+
+		 	
+		 	 oldcep 	= $.trim(classeCep.getCep());
+		 	
+		 	 // Compara os valores do CEP
+		 	if(oldcep != tempValue)
+		 	{
+		 	 	//JSON
+		 	 	$.getJSON(url, function( cep ) {
+			  		//verificar se é objeto
+			   		if (cep instanceof Object == true) {
+						if(cep.bairro.length > 0 && cep.logradouro.length > 0  && cep.localidade.length > 0  && cep.uf.length > 0)
+						{
+							//set Valor do CEP
+					 		classeCep.setCep(tempValue);
+					 		classeCep.setUf(cep.uf);
+					 		classeCep.setCidade(cep.localidade);
+					 		classeCep.setBairro(cep.bairro);
+					 		classeCep.setLogradouro(cep.logradouro);
+					 		//  camposCep.prototype = new Cep();
+
+					 		classeCep.modificaValores();
+
+					 	}
+				 	
+					}
+							 
+		 		});	//close getJson
+		 	 }
+		 	 	
+		}); // close bind 
+  });//close DOM
+
+
+
+ </script>

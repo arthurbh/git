@@ -1,0 +1,25 @@
+ <?php
+ // module/Tarefas/view/tarefas/tarefas/add.phtml:
+
+ $title = 'Adicionar tarefas';
+ $this->headTitle($title);
+ ?>
+ <h1><?php echo $this->escapeHtml($title); ?></h1>
+ <?php
+ $form->setAttribute('action', $this->url('tarefas', array('action' => 'add')));
+ $form->prepare();
+
+ echo $this->form()->openTag($form);
+ echo $this->formHidden($form->get('id'));
+ echo $this->formRow($form->get('titulo'));
+ echo $this->formRow($form->get('descricao'));
+ echo $this->formRow($form->get('fk_responsavel'));
+ echo $this->formRow($form->get('data_inicio'));
+ echo $this->formRow($form->get('data_fim'));
+ echo $this->formRow($form->get('prioridade'));
+ echo $this->formSubmit($form->get('submit'));
+ echo $this->form()->closeTag();
+
+
+//exibe o formulario carregado do controller
+ #echo $this->formCollection($form);
